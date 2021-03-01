@@ -8,7 +8,9 @@ export default new Vuex.Store({
     counter: 0
   },
   getters: {
-
+    doubleCounter: (state) => {
+      return state.counter * 2
+    }
   },
   mutations: {
     add (state) {
@@ -16,6 +18,12 @@ export default new Vuex.Store({
       state.counter++
     }
   },
-  actions: {},
+  actions: {
+    add ({ commit }) {
+      //异步方法
+      setTimeout(() => commit('add'), 1000)
+
+    }
+  },
   modules: {}
 })
