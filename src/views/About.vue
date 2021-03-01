@@ -1,5 +1,10 @@
 <template>
-  <h1>about</h1>
+  <div>
+    <h1>about</h1>
+    <div @click="$store.commit('add')">
+      {{$store.state.counter}}</div>
+  </div>
+
 </template>
 
 <script>
