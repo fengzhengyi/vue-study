@@ -18,12 +18,7 @@ function defineReactive (obj, key, val) {
     }
   })
 }
-// function update (val) {
-//   //document.querySelector('.app').innerText = val
-// }
-function set (obj, key, val) {
-  defineReactive(obj, key, val)
-}
+
 function observe (obj) {
   if (typeof obj !== 'object' || obj === null) {
     return
@@ -33,15 +28,11 @@ function observe (obj) {
   })
 }
 
-const obj = {
-  foo: 'foo',
-  bar: 'bar',
-  baz: { a: 1 }
+
+class KVue {
+  constructor(options) {
+    this.$options = options
+  }
 }
-observe(obj)
-// obj.foo
-// obj.bar
-// obj.baz.a
-// obj.baz = { a: 10 }
-// obj.baz.a
-set(obj,'dong','dong')
+
+export default KVue
