@@ -1,3 +1,5 @@
+import Link from "./krouter-link";
+import View from "./krouter-view";
 let Vue = null;
 //定义插件类
 class VueRouter {
@@ -31,29 +33,8 @@ VueRouter.install = function (_Vue) {
   });
 
   //声明router-link, router-view组件
-  Vue.component('router-link', {
-    props: {
-      to: {
-        type: String,
-        require: true
-      }
-    },
-    render (h) {
-      return h('a', { attrs: { href: '#' + this.to } }, this.$slots.default)
-    }
-  })
-  Vue.component('router-view', {
-    render (h) {
-      //通过当前的hash值，找到routes中的和hash匹配的对象的component
-      let comp = null
-      const route = this.$router.$options.routes.find(
-        route => route.path === this.$router.current)
-      if (route) {
-        comp = route.component
-      }
-      return h(comp)
-    }
-  })
+  Vue.component('router-link', Link)
+  Vue.component('router-view', View)
 };
 
 export default VueRouter;
