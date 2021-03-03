@@ -1,0 +1,40 @@
+<h1 class="app" k-text="obj.foo"></h1>
+<h1 class="app"></h1>
+<script>
+  function defineReactive (obj, key, val) {
+  observe(val)
+  Object.defineProperty(obj, key, {
+    get () {
+      console.log('get '+key)
+      return val
+    },
+    set (newVal) {
+      console.log('set '+key)
+      val = newVal
+      update(val)
+    }
+  })
+}
+function update(val) {
+  document.querySelector('.app').innerText = val
+}
+
+function observe(obj){
+  if (typeof obj !=='object' || obj===null) { 
+    return
+  }
+  Object.keys(obj).forEach(key=>{
+    defineReactive(obj, key, obj[key])
+  })
+}
+
+const obj = {
+  foo:'foo',
+  bar:'bar',
+  baz:{a:1}
+}
+observe(obj)
+obj.foo
+obj.bar
+obj.baz.a
+</script>
