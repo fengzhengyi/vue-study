@@ -22,7 +22,6 @@ export default new Vuex.Store({
     add ({ commit }) {
       //异步方法
       setTimeout(() => commit('add'), 1000)
-
     }
   },
   modules: {}

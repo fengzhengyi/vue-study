@@ -13,7 +13,7 @@ class VueRouter {
       //截取#后面的部分
       this.current = window.location.hash.slice(1)
     })
-    //3.响应hash的变化
+    //3.响应hash的变化,在router-view中
   }
 }
 //VueRouter是一个插件，必须实现install方法
