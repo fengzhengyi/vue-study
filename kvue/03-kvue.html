@@ -3,8 +3,8 @@
     <p>{{counter}}</p>
     <p k-text="counter"></p>
     <p k-html="desc"></p>
-    <input type="text" k-model="title">
-    <button k-on:click="click">点击事件</button>
+    <input type="number" k-model="counter">
+    <button k-on:click="add">点击事件</button>
 </div>
 <script src="./kvue.js"></script>
 <script>
@@ -16,10 +16,9 @@
             title: '这是可编辑的'
         },
         methods: {
-            click() {
-                alert('事件绑定成功！！')
+            add() {
+                this.counter++
             }
         }
     })
-    setInterval(() => app.counter++, 1000)
 </script>
