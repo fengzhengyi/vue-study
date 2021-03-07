@@ -1,4 +1,17 @@
+//数组的响应式处理
+//覆盖那些能够更新数组的原生方法，使其能够通知更新
+//将得到的新的原型设置到数组实例原型上
+const orginalProto = Array.prototype
+const arrayProto = Object.create(orginalProto)
+// eslint-disable-next-line no-unexpected-multiline
+['pull', 'pop', 'shift', 'unshift', 'splice', 'sort', 'reverse'].forEach(method => {
+    arrayProto[method] = function () {
+        orginalProto[method].apply(this, arguments)
+        //覆盖操作，通知更新
+    }
+})
 
+//对象的响应式处理
 function defineReactive (obj, key, val) {
     observe(val)
     const dep = new Dep()
@@ -32,7 +45,12 @@ function observe (obj) {
 class Observer {
     constructor(obj) {
         if (Array.isArray(obj)) {
-            //todo 数组的响应式
+            //覆盖实例的原型，替换7个变更操作
+            obj.__proto__ = arrayProto
+            //处理数组项内部的响应式
+            for (let id = 0; id < obj.length; id++) {
+                observe(obj[id])
+            }
         } else {
             Object.keys(obj).forEach(key => {
                 defineReactive(obj, key, obj[key])
